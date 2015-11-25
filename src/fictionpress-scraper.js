@@ -7,8 +7,8 @@ var request  = bluebird.promisifyAll(require('request'), {multiArgs: true}); // 
 var parse    = require('./parse');                                           // Helper functions for parsing.
 
 // Constants
-const BASE_URL = 'https://www.fictionpress.com';
-const CONCURRENCY = 10;	// Maximum number of requests at any given time.
+var BASE_URL = 'https://www.fictionpress.com';
+var CONCURRENCY = 10;	// Maximum number of requests at any given time.
 
 // Functions
 // Generates story URL from given ID.
