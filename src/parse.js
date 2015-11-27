@@ -20,7 +20,7 @@ function parseTitle($){
 
 // Returns author object (id number & un-slugified name).
 function parseAuthor($){
-	var author = { id : '', name : ''};
+	var author = { id : 0, name : ''};
 	// First <a> within <div> is almost always author info.
 	var authorData = $('div#profile_top').children().closest('a').attr('href').match(/^\/u\/(\d+)\/([\w\d\-]+)$/);
 
@@ -28,7 +28,7 @@ function parseAuthor($){
 	if(!authorData || !authorData[1] || !authorData[2]){
 		throw new Error('Unable to parse author information.');
 	}else{
-		author.id = authorData[1];
+		author.id = parseInt(authorData[1], 10);
 		author.name = authorData[2].replace(/\-/g, ' '); // Un-slugify the author name. Replaces all dashes with spaces.
 
 		return author;
@@ -43,7 +43,7 @@ function parseID($){
 	if(!storyIDData || !storyIDData[1]){
 		throw new Error('Unable to parse story ID.');
 	}else{
-		return storyIDData[1];
+		return parseInt(storyIDData[1], 10);
 	}
 }
 
@@ -64,7 +64,7 @@ function parseChapter(body){
 	var $ = cheerio.load(body);
 	// Initialise chapter object.
 	var chapter = {
-		id: '',
+		id: 0,
 		title: '',
 		data: ''
 	};
@@ -74,13 +74,13 @@ function parseChapter(body){
 		// Get chapter no. & title.
 
 		// closest() - There are 2 chapter selectors in the page. Fetch the first, otherwise both chapter selectors are processed.
-		var chapterInfo = $('select#chap_select').children().closest('option:selected').text().match(/(\d+)\.\s(.+)/);
+		var chapterInfo = $('select#chap_select').first().children().closest('option:selected').text().match(/(\d+)\.\s(.+)/);
 		// Throw error if falsy. Needs work.
 		if(!chapterInfo || !chapterInfo[1] || !chapterInfo[2]){
 			throw new Error('Unable to parse chapter information.');
 		}
 		// [TODO] : Clean this function up. It's a bit convoluted.
-		chapter.id = chapterInfo[1];
+		chapter.id = parseInt(chapterInfo[1], 10);
 		chapter.title = chapterInfo[2];
 	}
 	else{
@@ -115,7 +115,7 @@ function parseNoChapters($){
 		if(!chaptersResult || !chaptersResult[1]){
 			throw new Error('Unable to parse number of chapters.');
 		}
-		return chaptersResult[1];
+		return parseInt(chaptersResult[1], 10);
 	} else {
 		return 1;
 	}
@@ -145,11 +145,11 @@ function parseInitialData(body) {
 
 	// Object to return. I should probably declare these objects somewhere & reference them. Or just clean up this project.
 	var result = {
-		id : '',
+		id : 0,
 		title : '',
-		author : { id : '', name : '' },
+		author : { id : 0, name : '' },
 		summary : '',
-		noOfChapters: '',
+		noOfChapters: 0,
 		content : []
 	};
 

@@ -9,7 +9,7 @@ npm install fictionpress-scraper --save
 var fpScraper = require('fictionpress-scraper');
 ```
 ### fpScraper.getStory(storyId)
-Fetches information (see returned object below), along with all chapters of the story.
+Fetches information, along with all chapters of the story.
 ```javascript
 fpScraper.getStory(storyID).then(function(story){
 	console.log(story);
@@ -17,17 +17,6 @@ fpScraper.getStory(storyID).then(function(story){
 	console.log(error);
 });
 ```
-### fpScraper.getInfo(storyId)
-Fetches information (see returned object below) along with the first chapter of the story. Useful if you just want information about a story.
-```javascript
-fpScraper.getInfo(storyID).then(function(story){
-	console.log(story);
-}).catch(function(error){
-	console.log(error);
-});
-```
-### Returned Objects
-#### story
 The following properties are available on the returned ```story``` object:
 ```
 {
@@ -52,7 +41,9 @@ The following properties are available on the returned ```story``` object:
 }
 ```
 
-## License
+# License
+The MIT License (MIT)
+
 Copyright (c) 2015 George Rawlinson <george@rawlinson.net.nz>
 
 
