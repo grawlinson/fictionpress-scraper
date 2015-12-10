@@ -4,6 +4,25 @@
 // Dependencies.
 var cheerio  = require('cheerio'); // Parse HTML pages.
 
+// Objects
+// Story
+function Story(){
+	this.id = 0;
+	this.title = '';
+	this.author = {};
+	this.author.id = 0;
+	this.author.name = '';
+	this.summary = '';
+	this.noOfChapters = 0;
+	this.content = [];
+}
+// Chapter
+function Chapter(){
+	this.id = 0;
+	this.title = '';
+	this.data = '';
+}
+
 // Functions
 // Returns story title.
 function parseTitle($){
@@ -62,12 +81,12 @@ function parseSummary($){
 // Returns chapter object (chapter id, title & data).
 function parseChapter(body){
 	var $ = cheerio.load(body);
+
+	// Check if story exists
+	if (is404($)) throw new Error('Fictionpress returned a 404.');
+
 	// Initialise chapter object.
-	var chapter = {
-		id: 0,
-		title: '',
-		data: ''
-	};
+	var chapter = new Chapter();
 
 	// Check if story has multiple chapters
 	if(isMultiChapter($)){
@@ -122,7 +141,6 @@ function parseNoChapters($){
 }
 
 // Check if the returned story is a 404.
-// Rename to storyExists?
 function is404($){
 	return /Story Not FoundUnable to locate story. Code 1./.test($('span.gui_warning').text());
 }
@@ -140,33 +158,26 @@ function isMultiChapter($){
 // Get all data on initial call.
 function parseInitialData(body) {
 	var $ = cheerio.load(body);
+
 	// Check if story exists
 	if (is404($)) throw new Error('Fictionpress returned a 404.');
 
 	// Object to return. I should probably declare these objects somewhere & reference them. Or just clean up this project.
-	var result = {
-		id : 0,
-		title : '',
-		author : { id : 0, name : '' },
-		summary : '',
-		noOfChapters: 0,
-		content : []
-	};
+	var story = new Story();
 
 	// Scrape page
-	result.title = parseTitle($);
-	result.id = parseID($);
-	result.summary = parseSummary($);
-	result.author = parseAuthor($);
-	result.noOfChapters = parseNoChapters($);
-	result.content.push(parseChapter(body));
+	story.title = parseTitle($);
+	story.id = parseID($);
+	story.summary = parseSummary($);
+	story.author = parseAuthor($);
+	story.noOfChapters = parseNoChapters($);
+	story.content.push(parseChapter(body));
 
-	return result;
+	return story;
 }
 
 // Exported functions.
 module.exports = {
-	is404,
 	initialData: parseInitialData,
 	chapter: parseChapter
 };
