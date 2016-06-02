@@ -1,6 +1,6 @@
 {
   "name": "fictionpress-scraper",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A promise based scraper for Fictionpress stories.",
   "main": "./src/fictionpress-scraper",
   "scripts": {
