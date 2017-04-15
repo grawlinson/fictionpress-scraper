@@ -39,18 +39,13 @@ function getInfo(id){
 }
 
 // Catch-all. Gets all information & all chapters.
-// [TODO] : Remove commented out sorting code. Currently assuming bluebird.map returns objects matching order of passed URLs.
 function getStory(id){
 	return getInfo(id).then(function(story){
 		// Check to see if we need to get more chapters (i.e. one-shot or multi-chapter.)
 		if(story.noOfChapters > 1){
-			return getChapters(getChapterURLs(story))/*
-			.call('sort', function(a,b){
-				return(a.id - b.id);
-			})*/
+			return getChapters(getChapterURLs(story))
 			.then(function(chapters){
 				story.content.push.apply(story.content, chapters);
-				//story.content.sort(function(a,b){return(a.id-b.id);});
 				return story;
 			});
 		}else{
@@ -75,27 +70,6 @@ function getChapters(urlList){
 	return bluebird.map(urlList, function(url){
 		return getChapter(url);
 	}, {concurrency: CONCURRENCY});
-}
-
-//BELOW FUNCTIONS AREN'T USED.
-function getChapterRange(storyID, firstChapter, lastChapter){
-	var urlRange = getChapterURLRange(storyID, firstChapter, lastChapter);
-	
-	if(urlRange === null) throw new Error ('I\'m not too sure how to play this one. We\'ll see.');
-
-	return getChapters(urlRange);
-}
-function getChapterURLRange(storyID, firstChapter, lastChapter){
-	if(firstChapter == lastChapter || firstChapter > lastChapter) return null;
-	
-	var urlRange = [];
-
-	for (var i = firstChapter; i <= lastChapter; i++) {
-		urlRange.push(BASE_URL + '/s/' + storyID + '/' + i + '/');
-	}
-
-	return urlRange;
-
 }
 
 // Exported Functions
