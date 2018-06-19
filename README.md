@@ -4,31 +4,28 @@ A promise based scraper for [Fictionpress](https://www.fictionpress.com) stories
 
 ## Installation
 
-```
+```shell
 npm install fictionpress-scraper --save
 ```
 
 ## Usage
 
 ```javascript
-var fpScraper = require('fictionpress-scraper');
+const fpScraper = require("fictionpress-scraper");
+
+fpScraper
+  .getStory(storyID)
+  .then(function(story) {
+    console.log(story);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
 ```
 
-### fpScraper.getStory(storyId)
-
-Fetches information, along with all chapters of the story.
+The following properties are available on the returned `story` object:
 
 ```javascript
-fpScraper.getStory(storyID).then(function(story){
-  console.log(story);
-}).catch(function(error){
-  console.log(error);
-});
-```
-
-The following properties are available on the returned ```story``` object:
-
-```
 {
   "id": Number,
   "title": String,
@@ -40,20 +37,17 @@ The following properties are available on the returned ```story``` object:
   "noOfChapters": Number,
   "content": []
 }
-
 ```
 
-```story.content``` is an array filled with ```chapter``` objects with the
+`story.content` is an array filled with `chapter` objects with the
 following structure:
 
-```
-
+```javascript
 {
   "id": Number,
   "title": String,
   "data": String
 }
-
 ```
 
 ### License
