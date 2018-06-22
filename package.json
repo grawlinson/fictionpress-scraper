@@ -2,9 +2,11 @@
   "name": "fictionpress-scraper",
   "version": "1.0.7",
   "description": "A promise based scraper for Fictionpress stories.",
-  "main": "./src/fictionpress-scraper",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Testing not implemented yet.\" && exit 1"
+    "test": "echo \"Testing not implemented yet.\" && exit 1",
+    "prebuild": "rimraf dist",
+    "build": "babel src -d dist"
   },
   "keywords": [
     "fictionpress",
@@ -22,11 +24,31 @@
   },
   "repository": {
     "type": "git",
-    "url": "grawlinson/fictionpress-scraper"
+    "url": "github:grawlinson/fictionpress-scraper"
   },
   "dependencies": {
-    "request": "2.81.0",
-    "cheerio": "0.22.0",
-    "bluebird": "3.5.0"
-  }
+    "cheerio": "1.0.0-rc.2",
+    "p-map": "1.2.0",
+    "request": "2.87.0",
+    "request-promise-native": "1.0.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.0.0-beta.51",
+    "@babel/core": "7.0.0-beta.51",
+    "@babel/preset-env": "7.0.0-beta.51",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "eslint": "4.19.1",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "prettier": "1.13.5",
+    "rimraf": "2.6.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE.md"
+  ]
 }
