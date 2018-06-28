@@ -4,7 +4,6 @@
   "description": "A promise based scraper for Fictionpress stories.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Testing not implemented yet.\" && exit 1",
     "prebuild": "rimraf dist",
     "build": "babel src -d dist"
   },
@@ -37,10 +36,10 @@
     "@babel/core": "7.0.0-beta.51",
     "@babel/preset-env": "7.0.0-beta.51",
     "babel-plugin-add-module-exports": "0.2.1",
-    "eslint": "4.19.1",
+    "eslint": "5.0.1",
     "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-prettier": "2.6.0",
-    "prettier": "1.13.5",
+    "eslint-plugin-prettier": "2.6.1",
+    "prettier": "1.13.6",
     "rimraf": "2.6.2"
   },
   "engines": {
