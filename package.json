@@ -27,20 +27,20 @@
   },
   "dependencies": {
     "cheerio": "1.0.0-rc.2",
-    "p-map": "1.2.0",
-    "request": "2.87.0",
+    "p-map": "2.0.0",
+    "request": "2.88.0",
     "request-promise-native": "1.0.5"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.51",
-    "@babel/core": "7.0.0-beta.51",
-    "@babel/preset-env": "7.0.0-beta.51",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "eslint": "5.0.1",
-    "eslint-config-prettier": "2.9.0",
-    "eslint-plugin-prettier": "2.6.1",
-    "prettier": "1.13.6",
-    "rimraf": "2.6.2"
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.2.2",
+    "@babel/preset-env": "7.2.3",
+    "babel-plugin-add-module-exports": "1.0.0",
+    "eslint": "5.12.0",
+    "eslint-config-prettier": "3.4.0",
+    "eslint-plugin-prettier": "3.0.1",
+    "prettier": "1.15.3",
+    "rimraf": "2.6.3"
   },
   "engines": {
     "node": ">=8.0.0"
