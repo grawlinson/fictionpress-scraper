@@ -7,7 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "babel src -d dist",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "yarn run snyk-protect"
   },
   "keywords": [
     "fictionpress",
@@ -32,7 +32,7 @@
     "p-map": "2.0.0",
     "request": "2.88.0",
     "request-promise-native": "1.0.5",
-    "snyk": "^1.189.0"
+    "snyk": "^1.258.2"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
